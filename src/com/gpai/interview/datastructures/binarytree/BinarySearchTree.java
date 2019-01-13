@@ -9,16 +9,15 @@ import java.util.Stack;
 /**
  * Insertion, search, and deletion can all be done in O(log n) time.
  * Traversal is O(n)
- * 
+ *
  * @author gpai
- * 
  */
 public class BinarySearchTree {
 
     private Node root;
-    
+
     public BinarySearchTree(Node root) {
-    	this.root = root;
+        this.root = root;
     }
 
     // insert is split into two
@@ -32,8 +31,8 @@ public class BinarySearchTree {
 
     // this uses recursion
     public void insert(Node currentNode, int val) {
-        
-    	Node insertNode = new Node(val);
+
+        Node insertNode = new Node(val);
 
         if (val < currentNode.value) {
             if (currentNode.left == null) {
@@ -247,9 +246,6 @@ public class BinarySearchTree {
     }
 
 
-
-
-    
     // iterative inorder traversal
     public void traverseTreeInOrder(Node node) {
         if (node == null) {
@@ -267,11 +263,11 @@ public class BinarySearchTree {
             }
         }
     }
-    
+
     public void breadthFirstUsingQueue() {
         breadthFirstUsingQueue(root);
     }
-    
+
     public void breadthFirstUsingQueue(Node node) {
         Queue<Node> queue = new LinkedList<Node>();
         Node currentNode = root;
@@ -290,152 +286,148 @@ public class BinarySearchTree {
             }
         }
     }
-    
-    
+
+
     // Can be used to print the Tree; in breadth-first order. 
     // Even null nodes are printed and level is indicated.
     public void breadthFirstPrint() {
-    	ArrayList<Node> nodes = new ArrayList<Node>();
-    	nodes.add(root);
-    	int level = 0;
-    	boolean notAllNodesEmpty = true;
-    	while(notAllNodesEmpty) {
-    		notAllNodesEmpty = false;
-    		System.out.println("-------------"
-    				+ "Level:" + level);
-    		for(int i=0; i< nodes.size(); i++) {
-    			Node node =  nodes.get(i);
-    			if (node!=null) {
-    				notAllNodesEmpty = true;
-    				System.out.println(node.value);
-    			} else {
-    				System.out.println("nullNode");
-    			}
-    		}
-    		
-    		nodes = getChildren(nodes);
-    		level++;
-    	}
+        ArrayList<Node> nodes = new ArrayList<Node>();
+        nodes.add(root);
+        int level = 0;
+        boolean notAllNodesEmpty = true;
+        while (notAllNodesEmpty) {
+            notAllNodesEmpty = false;
+            System.out.println("-------------"
+                    + "Level:" + level);
+            for (int i = 0; i < nodes.size(); i++) {
+                Node node = nodes.get(i);
+                if (node != null) {
+                    notAllNodesEmpty = true;
+                    System.out.println(node.value);
+                } else {
+                    System.out.println("nullNode");
+                }
+            }
+
+            nodes = getChildren(nodes);
+            level++;
+        }
     }
-    
+
     // Just a convenience function for the above method - breadthFirstPrint()
     // Give a list of nodes, returns the children of all the nodes. 
     // Even null children are returned
     public ArrayList<Node> getChildren(ArrayList<Node> nodes) {
-    	ArrayList<Node> children = new ArrayList<Node>();
-    	for(int i=0; i< nodes.size(); i++) {
-    		Node node =  nodes.get(i);
-    		if(node!=null) {
-    			Node nodeLeft = nodes.get(i).left;
-    			Node nodeRight = nodes.get(i).right;
-    			children.add(nodeLeft);
-    			children.add(nodeRight);
-    		}
-    	}
-    	return children;
+        ArrayList<Node> children = new ArrayList<Node>();
+        for (int i = 0; i < nodes.size(); i++) {
+            Node node = nodes.get(i);
+            if (node != null) {
+                Node nodeLeft = nodes.get(i).left;
+                Node nodeRight = nodes.get(i).right;
+                children.add(nodeLeft);
+                children.add(nodeRight);
+            }
+        }
+        return children;
     }
-    
+
     /**
      * Given the root node a tree, return a set of all paths that add up to the targetSum
      * Doesn't assume this is a binary SEARCH tree. Works for both binary search tree and binary tree.
-     * @param node Root of the tree (or could be any node really, from where you want to begin)
+     *
+     * @param node      Root of the tree (or could be any node really, from where you want to begin)
      * @param targetSum Targeted sum
      * @return Set of strings indicating all paths that add up to the targetSum
      */
-    public  HashSet<String> findPathsWithSum(Node node, int targetSum) {
-    	String currentPath = String.valueOf(node.value);
-    	return progressTowardsSum(node, currentPath, new HashSet<String>(), node.value, targetSum );
+    public HashSet<String> findPathsWithSum(Node node, int targetSum) {
+        String currentPath = String.valueOf(node.value);
+        return progressTowardsSum(node, currentPath, new HashSet<String>(), node.value, targetSum);
     }
-    
-    
+
+
     /**
      * Used by findPathsWithSum
+     *
      * @param currentNode Node we are processing
      * @param currentPath Path of nodes we have taken so far, including the currentNode
-     * @param allPaths All paths gathered so far, that sum to the targetSum
-     * @param currentSum current sum so far of all the nodes in the currentPath, including the currentNode
-     * @param targetSum The target sum for which we are finding all the paths
+     * @param allPaths    All paths gathered so far, that sum to the targetSum
+     * @param currentSum  current sum so far of all the nodes in the currentPath, including the currentNode
+     * @param targetSum   The target sum for which we are finding all the paths
      * @return Set of strings that indicate the path that add up to the targetSum
      */
     public HashSet<String> progressTowardsSum(Node currentNode, String currentPath, HashSet<String> allPaths, int currentSum, int targetSum) {
-    	
-    	if(currentNode.left!=null) {
-    		Node childNode = currentNode.left;
-	    	int sum = currentSum + childNode.value;
-	    	if(sum == targetSum) {
-	    		String newCurrentPath = currentPath + "->" + childNode.value;
-	    		allPaths.add(newCurrentPath);
-	    	} else if (sum < targetSum) {
-	    		String newCurrentPath = currentPath + "->" + childNode.value;
-	    		progressTowardsSum(childNode, newCurrentPath, allPaths, sum, targetSum);
-	    	} else if (sum > targetSum) {
-	    		// do nothing
-	    	}
-    	} 
-    	
-    	if(currentNode.right!=null) {
-    		Node childNode = currentNode.right;
-	    	int sum = currentSum + childNode.value;
-	    	if(sum == targetSum) {
-	    		String newCurrentPath = currentPath + "->" + childNode.value;
-	    		allPaths.add(newCurrentPath);
-	    	} else if (sum < targetSum) {
-	    		String newCurrentPath = currentPath + "->" + childNode.value;
-	    		progressTowardsSum(childNode, newCurrentPath, allPaths, sum, targetSum);
-	    	} else if (sum > targetSum) {
-	    		// do nothing
-	    	}
-    	} 
-    	
-		return allPaths;
-    	
-    	
+
+        if (currentNode.left != null) {
+            Node childNode = currentNode.left;
+            int sum = currentSum + childNode.value;
+            if (sum == targetSum) {
+                String newCurrentPath = currentPath + "->" + childNode.value;
+                allPaths.add(newCurrentPath);
+            } else if (sum < targetSum) {
+                String newCurrentPath = currentPath + "->" + childNode.value;
+                progressTowardsSum(childNode, newCurrentPath, allPaths, sum, targetSum);
+            } else if (sum > targetSum) {
+                // do nothing
+            }
+        }
+
+        if (currentNode.right != null) {
+            Node childNode = currentNode.right;
+            int sum = currentSum + childNode.value;
+            if (sum == targetSum) {
+                String newCurrentPath = currentPath + "->" + childNode.value;
+                allPaths.add(newCurrentPath);
+            } else if (sum < targetSum) {
+                String newCurrentPath = currentPath + "->" + childNode.value;
+                progressTowardsSum(childNode, newCurrentPath, allPaths, sum, targetSum);
+            } else if (sum > targetSum) {
+                // do nothing
+            }
+        }
+
+        return allPaths;
+
 
     }
-    
 
-    
-    
+
     public static void main(String args[]) {
-    	BinarySearchTree bst = new BinarySearchTree(null);
-    	bst.insert(10);
-    	bst.insert(55);
-    	bst.insert(60);
-    	bst.insert(65);
-    	bst.insert(100);
-    	bst.insert(95);
-    	bst.insert(90);
-    	bst.insert(70);
-    	bst.insert(75);
-    	bst.insert(15);
-    	System.out.println("--------Breath First using queue:");
-    	bst.breadthFirstUsingQueue();
-    	System.out.println("--------Breath First using ArrayList:");
-    	bst.breadthFirstPrint();
-    	
-    	// testing finding paths with nodes from root, that add up to a sum
-    	Node root = new Node(10);
-    	BinarySearchTree bst1 = new BinarySearchTree(root);
-    	Node nodeLeft = new Node(20);
-    	Node nodeRight = new Node(25);
-    	root.left = nodeLeft;
-    	root.right = nodeRight;
-    	Node nodeLeft1 = new Node(10);
-    	Node nodeRight1 = new Node(5);
-    	nodeLeft.left = nodeLeft1;
-    	nodeLeft.right = nodeRight1;
-    	Node nodeLeft2 = new Node(5);
-    	Node nodeRight2 = new Node(10);
-    	nodeRight.left = nodeLeft2;
-    	nodeRight.right = nodeRight2;
-    	bst1.breadthFirstPrint();
-    	System.out.println("---------Paths with the sum 40:");
-    	System.out.println(bst1.findPathsWithSum(root, 40));
-    	
-    	
-    	
-    	
-    	
+        BinarySearchTree bst = new BinarySearchTree(null);
+        bst.insert(10);
+        bst.insert(55);
+        bst.insert(60);
+        bst.insert(65);
+        bst.insert(100);
+        bst.insert(95);
+        bst.insert(90);
+        bst.insert(70);
+        bst.insert(75);
+        bst.insert(15);
+        System.out.println("--------Breath First using queue:");
+        bst.breadthFirstUsingQueue();
+        System.out.println("--------Breath First using ArrayList:");
+        bst.breadthFirstPrint();
+
+        // testing finding paths with nodes from root, that add up to a sum
+        Node root = new Node(10);
+        BinarySearchTree bst1 = new BinarySearchTree(root);
+        Node nodeLeft = new Node(20);
+        Node nodeRight = new Node(25);
+        root.left = nodeLeft;
+        root.right = nodeRight;
+        Node nodeLeft1 = new Node(10);
+        Node nodeRight1 = new Node(5);
+        nodeLeft.left = nodeLeft1;
+        nodeLeft.right = nodeRight1;
+        Node nodeLeft2 = new Node(5);
+        Node nodeRight2 = new Node(10);
+        nodeRight.left = nodeLeft2;
+        nodeRight.right = nodeRight2;
+        bst1.breadthFirstPrint();
+        System.out.println("---------Paths with the sum 40:");
+        System.out.println(bst1.findPathsWithSum(root, 40));
+
+
     }
 
 }
