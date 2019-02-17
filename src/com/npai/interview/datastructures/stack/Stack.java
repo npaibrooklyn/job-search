@@ -1,6 +1,6 @@
-package com.gpai.interview.datastructures.stack;
+package com.npai.interview.datastructures.stack;
 
-import com.gpai.interview.datastructures.queue.Node;
+import com.npai.interview.datastructures.queue.Node;
 
 public class Stack {
 	

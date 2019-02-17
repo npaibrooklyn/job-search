@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.singlylinkedlist;
+package com.npai.interview.datastructures.singlylinkedlist;
 
 /**
  * A simple node for use in linked lists.

@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.singlylinkedlist;
+package com.npai.interview.datastructures.singlylinkedlist;
 
 /**
  * As such, linked lists in DSA have the following characteristics:
@@ -13,7 +13,7 @@ package com.gpai.interview.datastructures.singlylinkedlist;
  * 
  * Searching is O(n)
  * 
- * @author gpai
+ * @author npai
  * 
  */
 public class LinkedList {

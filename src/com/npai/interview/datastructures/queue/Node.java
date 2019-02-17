@@ -1,8 +1,8 @@
-package com.gpai.interview.datastructures.stack;
+package com.npai.interview.datastructures.queue;
 
 public class Node {
-	int value;
-	Node next;
+	public int value;
+	public Node next;
 
 	public Node(int val) {
 		this.value = val;

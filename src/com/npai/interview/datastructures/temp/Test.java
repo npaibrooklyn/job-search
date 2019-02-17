@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.temp;
+package com.npai.interview.datastructures.temp;
 
 public class Test {
 	

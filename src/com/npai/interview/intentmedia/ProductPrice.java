@@ -1,10 +1,10 @@
-package com.gpai.interview.intentmedia;
+package com.npai.interview.intentmedia;
 import java.util.Comparator;
 
 /**
  * Class that encapsulates the price of a product for a particular volume. 
  * For example, this can express, 5 for $10
- * @author gpai
+ * @author npai
  *
  */
 public class ProductPrice implements Comparator<ProductPrice> {

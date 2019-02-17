@@ -1,4 +1,4 @@
-package com.gpai.interview.intentmedia;
+package com.npai.interview.intentmedia;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Class that encapsulates the entire price sheet that contains price offers for all the products
  * that the terminal can possibly scan
- * @author gpai
+ * @author npai
  *
  */
 public class PriceSheet {

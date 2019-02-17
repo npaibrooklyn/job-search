@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.trie;
+package com.npai.interview.datastructures.trie;
 
 public class Node {
 	

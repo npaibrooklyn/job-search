@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.queue;
+package com.npai.interview.datastructures.queue;
 
 public class Queue {
 	Node first;

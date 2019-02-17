@@ -1,4 +1,4 @@
-package com.gpai.interview.miscellaneous;
+package com.npai.interview.miscellaneous;
 
 
 import java.util.ArrayList;

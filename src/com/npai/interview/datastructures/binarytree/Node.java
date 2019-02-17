@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.binarytree;
+package com.npai.interview.datastructures.binarytree;
 
 public class Node {
 	int value;

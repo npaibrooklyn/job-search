@@ -1,4 +1,4 @@
-package com.gpai.interview.datastructures.binarytree;
+package com.npai.interview.datastructures.binarytree;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Stack;
  * Insertion, search, and deletion can all be done in O(log n) time.
  * Traversal is O(n)
  *
- * @author gpai
+ * @author npai
  */
 public class BinarySearchTree {
 

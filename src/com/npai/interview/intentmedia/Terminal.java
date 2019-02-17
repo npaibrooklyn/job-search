@@ -1,4 +1,4 @@
-package com.gpai.interview.intentmedia;
+package com.npai.interview.intentmedia;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 /**
  * Class that encapsulates the terminal and provides scan and total calculation functionality
- * @author gpai
+ * @author npai
  *
  */
 public class Terminal {
